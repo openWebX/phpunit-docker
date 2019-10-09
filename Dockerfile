@@ -1,4 +1,4 @@
-FROM ubuntu:18.10
+FROM ubuntu:19.10
 
 MAINTAINER jens@reinemuth.rocks
 
@@ -34,7 +34,7 @@ RUN apt-get install -y \
 RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
 
 # PHP
-RUN LC_ALL=en_US.UTF-8 add-apt-repository ppa:ondrej/php && apt-get update && apt-get install -y php7.3
+RUN LC_ALL=en_US.UTF-8 && apt-get update && apt-get install -y php7.3
 RUN apt-get install -y \
     php7.3-curl \
     php7.3-dev \
