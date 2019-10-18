@@ -29,7 +29,8 @@ RUN apt-get install -y \
     nasm \
     libjpeg-dev \
     libpng-dev \
-    libpng16-16
+    libpng16-16 \
+    nmap
 
 RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
 
