@@ -54,6 +54,7 @@ RUN apt-get install -y \
     php7.3-soap \
     php-memcached
 RUN command -v php
+RUN pecl install parallel && docker-php-ext-enable parallel
 
 # Composer
 RUN curl -sS https://getcomposer.org/installer | php
