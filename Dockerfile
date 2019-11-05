@@ -9,7 +9,7 @@ RUN DEBIAN_FRONTEND=noninteractive
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-RUN apt-get update
+RUN apt-get update --fix-missing
 RUN apt-get install -y \
     sudo \
     autoconf \
@@ -53,6 +53,7 @@ RUN apt-get install -y \
     php7.3-yaml \
     php7.3-xdebug \
     php7.3-soap \
+    php7.3 -redis \
     php-memcached
 RUN command -v php
 
@@ -68,10 +69,6 @@ RUN sudo add-apt-repository -y -r ppa:chris-lea/node.js
 RUN sudo rm -f /etc/apt/sources.list.d/chris-lea-node_js-*.list
 RUN sudo rm -f /etc/apt/sources.list.d/chris-lea-node_js-*.list.save
 RUN curl -sSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | sudo apt-key add -
-# The below command will set this correctly, but if lsb_release isn't available, you can set it manually:
-# - For Debian distributions: jessie, sid, etc...
-# - For Ubuntu distributions: xenial, bionic, etc...
-# - For Debian or Ubuntu derived distributions your best option is to use the codename corresponding to the upstream release your distribution is based off. This is an advanced scenario and unsupported if your distribution is not listed as supported per earlier in this README.
 RUN DISTRO="$(lsb_release -s -c)"
 RUN echo "deb https://deb.nodesource.com/node_12.x disco main" | sudo tee /etc/apt/sources.list.d/nodesource.list
 RUN echo "deb-src https://deb.nodesource.com/node_12.x disco main" | sudo tee -a /etc/apt/sources.list.d/nodesource.list
@@ -90,3 +87,4 @@ RUN php -v
 RUN composer --version
 RUN node -v
 RUN npm -v
+CMD service redis start 
