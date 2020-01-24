@@ -1,2 +1,2 @@
 # phpunit-docker
-docker image based on ubuntu 18.04, containing php 7.3, phpunit, composer, nodejs
+docker image based on ubuntu 19.10, containing php 7.4, phpunit, composer, nodejs
